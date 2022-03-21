@@ -5,28 +5,30 @@ const passportConfig = require("./lib/passportConfig");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path")
+require("dotenv").config()
+
 // MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
-  .then((res) => console.log("Connected to DB"))
-  .catch((err) => console.log(err));
+    .connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+    })
+    .then((res) => console.log("Connected to DB"))
+    .catch((err) => console.log(err));
 
 // initialising directories
 if (!fs.existsSync("./public")) {
-  fs.mkdirSync("./public");
+    fs.mkdirSync("./public");
 }
 if (!fs.existsSync("./public/resume")) {
-  fs.mkdirSync("./public/resume");
+    fs.mkdirSync("./public/resume");
 }
 if (!fs.existsSync("./public/profile")) {
-  fs.mkdirSync("./public/profile");
+    fs.mkdirSync("./public/profile");
 }
-require("dotenv").config()
+
 const app = express();
 const port = process.env.PORT || 4444;
 
@@ -38,7 +40,7 @@ app.use(cors());
 app.use(express.json());
 app.use(passportConfig.initialize());
 app.use(express.static(path.join(__dirname, "client", "build")))
-// Routing
+    // Routing
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/api", require("./routes/apiRoutes"));
 app.use("/upload", require("./routes/uploadRoutes"));
@@ -46,10 +48,10 @@ app.use("/host", require("./routes/downloadRoutes"));
 
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 
 app.listen(port, () => {
-  console.log(`Server started on port ${port}!`);
+    console.log(`Server started on port ${port}!`);
 });
