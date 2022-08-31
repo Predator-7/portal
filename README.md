@@ -4,7 +4,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Description : 
+## Description : 
+A realtime job portal website . It is a MERN Stack based web app which helps in streamlining the flow of job
+application process. It allows users to select there roles (applicant/recruiter), and create an account. In this web app,
+login session are persistent and REST APIs are securely protected by JWT token verification.
 
 ## Available Scripts
 
